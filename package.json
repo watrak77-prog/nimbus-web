@@ -1,0 +1,6 @@
+{
+  "name": "nimbus-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Official landing page for Nimbus Client & Nimbus Launcher (deployed on Vercel)"
+}
