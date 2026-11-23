@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nimbus Client — Modern Fabric Minecraft Client &amp; Launcher (1.21.11 – 26.3)</title>
-<meta name="description" content="Nimbus Client is a free, ultra-fast Fabric Minecraft client & launcher (1.21.11 – 26.3). 60+ built-in PvP & HUD modules, automatic FPS stack, pixel-locked Waypoints, custom Skins & Capes, Host World, and Modrinth Explorer.">
+<title>Nimbus Client — The Best Non-Premium Minecraft Client (1.21.11 – 26.3)</title>
+<meta name="description" content="Nimbus Client is the best non-premium Fabric Minecraft client & launcher (1.21.11 – 26.3). Play with any nickname, custom skins & capes, 60+ built-in PvP & HUD modules, automatic FPS stack, and Modrinth Explorer.">
 <meta name="theme-color" content="#0a0c12">
-<meta property="og:title" content="Nimbus Client — Modern Minecraft Client & Launcher">
-<meta property="og:description" content="60+ built-in modules, automatic Fabric FPS stack (Sodium + Lithium), Waypoints, custom Skins & Capes, Host World, and built-in Modrinth Explorer for Minecraft 1.21.11 – 26.3.">
+<meta property="og:title" content="Nimbus Client — The Best Non-Premium Minecraft Client">
+<meta property="og:description" content="The best non-premium Fabric Minecraft client: 60+ built-in modules, automatic FPS stack (Sodium + Lithium), Waypoints, custom Skins & Capes, Host World, and Modrinth Explorer for 1.21.11 – 26.3.">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,11 +62,11 @@
 				</a>
 
 				<h1 class="hero-title">
-					Play Minecraft Faster.<br><span>Cleaner. Yours.</span>
+					The Best Non&#8209;Premium<br>Minecraft Client.<br><span>Pure FPS. Zero Limits.</span>
 				</h1>
 
 				<p class="hero-sub">
-					A modern Fabric Minecraft client &amp; launcher inspired by top PvP clients — 60+ built-in modules, automatic FPS stack, pixel-locked Waypoints, custom Skins &amp; Capes, and Modrinth Explorer. 100% free, zero paywalls.
+					Play Minecraft instantly with any nickname — no premium account required. Packed with 60+ built-in PvP &amp; HUD modules, an automatic Fabric FPS stack, custom Skins &amp; Capes, pixel-locked Waypoints, and 1-click Modrinth Explorer. 100% free forever.
 				</p>
 
 				<div class="cta-row">
@@ -118,110 +118,69 @@
 				</div>
 			</div>
 
-			<!-- Interactive Client Preview Showcase -->
-			<div class="showcase">
-				<div class="showcase-chrome">
-					<div class="chrome-dots"><span></span><span></span><span></span></div>
-					<div class="showcase-tabs" role="tablist">
-						<button class="sc-tab active" data-sc="hud">In-Game HUD</button>
-						<button class="sc-tab" data-sc="menu">Title Screen</button>
-						<button class="sc-tab" data-sc="launcher">Launcher</button>
-					</div>
-					<span class="chrome-ver" id="chrome-ver">1.21.11</span>
-				</div>
+			<!-- Cinematic Motion Graphic Stage -->
+			<div class="cinema" id="cinema" aria-label="Nimbus Client cinematic motion graphic">
+				<canvas id="cinema-canvas" aria-hidden="true"></canvas>
+				<div class="cm-vignette" aria-hidden="true"></div>
+				<div class="cm-scanline" aria-hidden="true"></div>
 
-				<!-- Tab 1: Interactive In-Game HUD Preview -->
-				<div class="sc-pane active" id="sc-hud">
-					<div class="mc-viewport">
-						<div class="mc-sky"></div>
-						<div class="mc-horizon"></div>
-						<div class="mc-crosshair">+</div>
+				<!-- Subtle viewfinder corner brackets -->
+				<span class="cm-corner tl" aria-hidden="true"></span>
+				<span class="cm-corner tr" aria-hidden="true"></span>
+				<span class="cm-corner bl" aria-hidden="true"></span>
+				<span class="cm-corner br" aria-hidden="true"></span>
 
-						<div class="hud-widget hud-fps" id="hw-fps"><span>FPS</span> <strong>482</strong></div>
-						<div class="hud-widget hud-cps" id="hw-cps"><span>CPS</span> <strong>12 | 8</strong></div>
-						<div class="hud-widget hud-coords" id="hw-coords">
-							<div><strong>X</strong> 214</div>
-							<div><strong>Y</strong> 68</div>
-							<div><strong>Z</strong> -842</div>
-							<div class="hc-bio">Plains · N</div>
-						</div>
-						<div class="hud-widget hud-keystrokes" id="hw-keys">
-							<div class="ks-row"><span class="ks-key active">W</span></div>
-							<div class="ks-row"><span class="ks-key">A</span><span class="ks-key">S</span><span class="ks-key">D</span></div>
-							<div class="ks-row"><span class="ks-key space">━━━</span></div>
-						</div>
-						<div class="hud-widget hud-potions" id="hw-potions">
-							<div class="pot-row"><span class="pot-dot speed"></span><div><b>Speed II</b><small>01:24</small></div></div>
-							<div class="pot-row"><span class="pot-dot str"></span><div><b>Strength I</b><small>00:41</small></div></div>
-						</div>
-						<div class="hud-waypoint" id="hw-wp">
-							<span class="wp-badge">B</span>
-							<span class="wp-tag">Base · 142m</span>
-						</div>
+				<!-- Top live telemetry bar -->
+				<div class="cm-top">
+					<div class="cm-rec">
+						<span class="live-dot"></span>
+						<span>NON-PREMIUM · FABRIC ENGINE</span>
 					</div>
-					<div class="hud-toggles">
-						<span class="ht-label">Try modules:</span>
-						<button class="ht-chip on" data-hw="hw-fps">FPS</button>
-						<button class="ht-chip on" data-hw="hw-cps">CPS</button>
-						<button class="ht-chip on" data-hw="hw-coords">Coords</button>
-						<button class="ht-chip on" data-hw="hw-keys">Keystrokes</button>
-						<button class="ht-chip on" data-hw="hw-potions">Potions</button>
-						<button class="ht-chip on" data-hw="hw-wp">Waypoints</button>
+					<div class="cm-telem">
+						<span id="cm-fps">542</span> FPS · <span id="cm-ms">1.8</span>ms
 					</div>
 				</div>
 
-				<!-- Tab 2: In-Game Main Menu Preview -->
-				<div class="sc-pane" id="sc-menu">
-					<div class="ig-viewport">
-						<div class="ig-top">
-							<div class="ig-pill"><span class="ig-av">W</span> Watrak <span class="live-dot"></span></div>
-							<div class="ig-top-right">
-								<span class="ig-sq">⚙</span>
-								<span class="ig-sq close">✕</span>
-							</div>
-						</div>
-						<div class="ig-center">
-							<svg class="ig-logo" viewBox="0 0 24 24"><use href="#i-logo"/></svg>
-							<div class="ig-brand"><strong>NIMBUS</strong> CLIENT</div>
-							<div class="ig-btn">Singleplayer</div>
-							<div class="ig-btn">Multiplayer</div>
-							<div class="ig-split">
-								<div class="ig-btn">Nimbus Mods <span class="ig-cnt">24</span></div>
-								<div class="ig-btn emerald">Settings</div>
-							</div>
-						</div>
-						<div class="ig-dock">
-							<span>▦</span><span>👕</span><span>⚙</span><span>🌐</span><span>📷</span>
-						</div>
+				<!-- Centerpiece holographic orbital crest -->
+				<div class="cm-center" id="cm-center">
+					<div class="cm-halo"></div>
+					<div class="cm-ring cm-ring-outer"></div>
+					<div class="cm-ring cm-ring-inner"></div>
+					<div class="cm-core">
+						<svg viewBox="0 0 24 24"><use href="#i-logo"/></svg>
+						<div class="cm-sheen"></div>
 					</div>
+
+					<!-- Orbiting kinetic motion badges -->
+					<div class="cm-orbit-pill p1" id="cm-pill-1"><span class="op-dot green"></span><b id="cm-p1-txt">540+ FPS Stack</b></div>
+					<div class="cm-orbit-pill p2" id="cm-pill-2"><span class="op-dot cyan"></span><b id="cm-p2-txt">Any Nickname</b></div>
+					<div class="cm-orbit-pill p3" id="cm-pill-3"><span class="op-dot violet"></span><b id="cm-p3-txt">Skins &amp; Capes</b></div>
 				</div>
 
-				<!-- Tab 3: Launcher Preview -->
-				<div class="sc-pane" id="sc-launcher">
-					<div class="ln-viewport">
-						<div class="ln-rail">
-							<span class="active">🚀</span><span>🎮</span><span>📚</span><span>🧩</span><span>🌐</span>
+				<!-- Bottom cinematic storyboard captions + timeline -->
+				<div class="cm-bottom">
+					<div class="cm-scenes">
+						<div class="cm-scene active" data-scene="0">
+							<span class="cm-kicker">01 // NON-PREMIUM FREEDOM</span>
+							<h3>Play Instantly. Any Account.</h3>
+							<p>Offline accounts, custom HD skins &amp; capes, and zero paywalls out of the box.</p>
 						</div>
-						<div class="ln-main">
-							<div class="ln-hero">
-								<div class="ln-cta">
-									<strong>LAUNCH GAME</strong>
-									<span>Nimbus Client 1.21.11 · Fabric</span>
-								</div>
-							</div>
-							<div class="ln-cards">
-								<div class="ln-card"><span>FPS STACK</span><b>6/6 Active</b></div>
-								<div class="ln-card"><span>MODRINTH</span><b>Mods · Packs · Shaders</b></div>
-							</div>
+						<div class="cm-scene" data-scene="1">
+							<span class="cm-kicker">02 // BUILT-IN PERFORMANCE</span>
+							<h3>Up to 3.5× Higher FPS.</h3>
+							<p>Auto-configured Sodium, Lithium, FerriteCore &amp; Culling with 60+ PvP modules.</p>
 						</div>
-						<div class="ln-aside">
-							<div class="ln-srvs"><span>H</span><span>P</span><span>D</span><span>+5</span></div>
-							<div class="ln-prof">
-								<small>LAUNCH PROFILE</small>
-								<b>Nimbus 1.21.11</b>
-								<div class="ln-bar"><div></div></div>
-							</div>
+						<div class="cm-scene" data-scene="2">
+							<span class="cm-kicker">03 // COMPLETE ECOSYSTEM</span>
+							<h3>1.21.11 – 26.3 in One Click.</h3>
+							<p>Modrinth Explorer, Shaders, Resource Packs, Host World &amp; isolated profiles.</p>
 						</div>
+					</div>
+
+					<div class="cm-timeline" role="tablist" aria-label="Cinematic scenes">
+						<button class="cm-seg active" data-seg="0" aria-label="Scene 1: Non-Premium Freedom"><span></span></button>
+						<button class="cm-seg" data-seg="1" aria-label="Scene 2: Built-in Performance"><span></span></button>
+						<button class="cm-seg" data-seg="2" aria-label="Scene 3: Complete Ecosystem"><span></span></button>
 					</div>
 				</div>
 			</div>

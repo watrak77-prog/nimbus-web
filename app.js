@@ -10,16 +10,307 @@ let activeModCat = "all";
 $("burger").addEventListener("click", () => $("nav-links").classList.toggle("open"));
 document.querySelectorAll("#nav-links a").forEach((a) => a.addEventListener("click", () => $("nav-links").classList.remove("open")));
 
-// ------------------------------------------------------------------ Interactive Showcase Tabs & HUD Toggles
-document.querySelectorAll(".sc-tab").forEach((btn) => btn.addEventListener("click", () => {
-	document.querySelectorAll(".sc-tab").forEach((b) => b.classList.toggle("active", b === btn));
-	document.querySelectorAll(".sc-pane").forEach((p) => p.classList.toggle("active", p.id === "sc-" + btn.dataset.sc));
-}));
-document.querySelectorAll(".ht-chip").forEach((chip) => chip.addEventListener("click", () => {
-	chip.classList.toggle("on");
-	const target = $(chip.dataset.hw);
-	if (target) target.classList.toggle("hidden", !chip.classList.contains("on"));
-}));
+// ------------------------------------------------------------------ Cinematic Motion Graphic Engine
+function initCinema() {
+	const stage = $("cinema");
+	const canvas = $("cinema-canvas");
+	if (!stage || !canvas) return;
+	const ctx = canvas.getContext("2d");
+	if (!ctx) return;
+
+	const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	const SCENE_MS = 4800;
+	const SCENE_META = [
+		{
+			pills: ["540+ FPS Stack", "Any Nickname", "Skins & Capes"],
+			accent: [30, 215, 96],
+			secondary: [56, 189, 248],
+		},
+		{
+			pills: ["60+ Built-in Mods", "Pixel Waypoints", "Lunar-Grade HUD"],
+			accent: [56, 189, 248],
+			secondary: [129, 140, 248],
+		},
+		{
+			pills: ["Sodium + Lithium", "Iris Shaders", "1.21.11 – 26.3"],
+			accent: [129, 140, 248],
+			secondary: [30, 215, 96],
+		},
+	];
+
+	let sceneIdx = 0;
+	let sceneTimer = null;
+	const scenes = Array.from(stage.querySelectorAll(".cm-scene"));
+	const segs = Array.from(stage.querySelectorAll(".cm-seg"));
+	const pillEls = [$("cm-pill-1"), $("cm-pill-2"), $("cm-pill-3")];
+	const pillTxts = [$("cm-p1-txt"), $("cm-p2-txt"), $("cm-p3-txt")];
+
+	function setScene(idx) {
+		sceneIdx = (idx + SCENE_META.length) % SCENE_META.length;
+		scenes.forEach((el, i) => el.classList.toggle("active", i === sceneIdx));
+		segs.forEach((seg, i) => {
+			seg.classList.remove("active", "done");
+			if (i < sceneIdx) seg.classList.add("done");
+			if (i === sceneIdx) {
+				void seg.offsetWidth; // restart progress bar animation
+				seg.classList.add("active");
+			}
+		});
+		const meta = SCENE_META[sceneIdx];
+		pillEls.forEach((el) => el && el.classList.add("swap"));
+		setTimeout(() => {
+			meta.pills.forEach((txt, i) => { if (pillTxts[i]) pillTxts[i].textContent = txt; });
+			pillEls.forEach((el) => el && el.classList.remove("swap"));
+		}, 190);
+		clearInterval(sceneTimer);
+		sceneTimer = setInterval(() => setScene(sceneIdx + 1), SCENE_MS);
+	}
+
+	segs.forEach((seg) => seg.addEventListener("click", () => setScene(Number(seg.dataset.seg || 0))));
+	setScene(0);
+
+	// Subtle live telemetry flicker
+	const fpsEl = $("cm-fps");
+	const msEl = $("cm-ms");
+	setInterval(() => {
+		const fps = 518 + Math.round(Math.sin(performance.now() * 0.002) * 28 + Math.random() * 14);
+		if (fpsEl) fpsEl.textContent = String(fps);
+		if (msEl) msEl.textContent = (1000 / fps).toFixed(1);
+	}, 650);
+
+	// Mouse 3D tilt + parallax
+	let mx = 0, my = 0, tx = 0, ty = 0;
+	const centerEl = $("cm-center");
+	stage.addEventListener("pointermove", (e) => {
+		const r = stage.getBoundingClientRect();
+		tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+		ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+		if (!reducedMotion) {
+			stage.style.transform = `perspective(1000px) rotateY(${(tx * 4.5).toFixed(2)}deg) rotateX(${(-ty * 3.5).toFixed(2)}deg)`;
+			if (centerEl) centerEl.style.transform = `translate(calc(-50% + ${(tx * 10).toFixed(1)}px), calc(-50% + ${(ty * 8).toFixed(1)}px))`;
+		}
+	});
+	stage.addEventListener("pointerleave", () => {
+		tx = 0; ty = 0;
+		stage.style.transform = "";
+		if (centerEl) centerEl.style.transform = "translate(-50%, -50%)";
+	});
+
+	// 3D Cube geometry (voxel blocks floating in space)
+	const CUBE_VERTS = [
+		[-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1],
+		[-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1],
+	];
+	const CUBE_FACES = [
+		[0, 1, 2, 3], [4, 5, 6, 7], [0, 1, 5, 4],
+		[2, 3, 7, 6], [0, 3, 7, 4], [1, 2, 6, 5],
+	];
+	const cubes = [
+		{ x: -0.35, y: -0.24, z: 0.9, size: 22, rx: 0.5, ry: 0.7, vx: 0.008, vy: 0.011, phase: 0.2, hue: "emerald" },
+		{ x: 0.36, y: -0.20, z: 1.0, size: 19, rx: 1.1, ry: 0.2, vx: -0.009, vy: 0.010, phase: 1.8, hue: "cyan" },
+		{ x: -0.37, y: 0.14, z: 0.85, size: 15, rx: 0.3, ry: 1.4, vx: 0.012, vy: -0.008, phase: 3.1, hue: "violet" },
+		{ x: 0.35, y: 0.16, z: 0.95, size: 24, rx: 0.8, ry: 0.5, vx: -0.007, vy: -0.011, phase: 4.4, hue: "emerald" },
+		{ x: 0.08, y: -0.33, z: 1.25, size: 12, rx: 1.5, ry: 0.9, vx: 0.013, vy: 0.009, phase: 2.5, hue: "cyan" },
+		{ x: -0.14, y: 0.24, z: 1.2, size: 13, rx: 0.4, ry: 0.4, vx: -0.011, vy: 0.012, phase: 5.2, hue: "white" },
+	];
+
+	// Floating luminous particles
+	const particles = Array.from({ length: 48 }, () => ({
+		x: Math.random(),
+		y: Math.random(),
+		r: 0.8 + Math.random() * 1.9,
+		vy: 0.00025 + Math.random() * 0.00055,
+		vx: (Math.random() - 0.5) * 0.0002,
+		alpha: 0.2 + Math.random() * 0.65,
+		phase: Math.random() * Math.PI * 2,
+	}));
+
+	let W = 540, H = 448, dpr = 1;
+	function resize() {
+		const rect = stage.getBoundingClientRect();
+		W = Math.max(300, rect.width);
+		H = Math.max(300, rect.height);
+		dpr = Math.min(window.devicePixelRatio || 1, 2);
+		canvas.width = Math.round(W * dpr);
+		canvas.height = Math.round(H * dpr);
+		ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+	}
+	resize();
+	window.addEventListener("resize", resize);
+
+	let curA = [30, 215, 96];
+	let curB = [56, 189, 248];
+	const lerp = (a, b, f) => a + (b - a) * f;
+
+	function drawCube(c, t) {
+		const cx = W * 0.5 + (c.x * W) + mx * 18;
+		const cy = H * 0.43 + (c.y * H) + Math.sin(t * 0.0014 + c.phase) * 9 + my * 14;
+		const ax = c.rx + t * 0.0006 * (c.vx > 0 ? 1 : -1);
+		const ay = c.ry + t * 0.0008 * (c.vy > 0 ? 1 : -1);
+		const cosX = Math.cos(ax), sinX = Math.sin(ax);
+		const cosY = Math.cos(ay), sinY = Math.sin(ay);
+		const s = c.size;
+
+		const pts = CUBE_VERTS.map(([vx, vy, vz]) => {
+			// rotate Y then X
+			const x1 = vx * cosY - vz * sinY;
+			const z1 = vx * sinY + vz * cosY;
+			const y2 = vy * cosX - z1 * sinX;
+			const z2 = vy * sinX + z1 * cosX;
+			const p = 180 / (180 + z2 * s);
+			return [cx + x1 * s * p, cy + y2 * s * p, z2];
+		});
+
+		const colors = {
+			emerald: ["rgba(30, 215, 96, 0.14)", "rgba(74, 222, 128, 0.72)"],
+			cyan: ["rgba(56, 189, 248, 0.14)", "rgba(125, 211, 252, 0.7)"],
+			violet: ["rgba(139, 92, 246, 0.15)", "rgba(167, 139, 250, 0.72)"],
+			white: ["rgba(226, 232, 240, 0.10)", "rgba(226, 232, 240, 0.55)"],
+		}[c.hue];
+
+		const sortedFaces = CUBE_FACES
+			.map((f) => ({ f, z: (pts[f[0]][2] + pts[f[1]][2] + pts[f[2]][2] + pts[f[3]][2]) * 0.25 }))
+			.sort((a, b) => a.z - b.z);
+
+		for (const { f } of sortedFaces) {
+			ctx.beginPath();
+			ctx.moveTo(pts[f[0]][0], pts[f[0]][1]);
+			ctx.lineTo(pts[f[1]][0], pts[f[1]][1]);
+			ctx.lineTo(pts[f[2]][0], pts[f[2]][1]);
+			ctx.lineTo(pts[f[3]][0], pts[f[3]][1]);
+			ctx.closePath();
+			ctx.fillStyle = colors[0];
+			ctx.fill();
+			ctx.strokeStyle = colors[1];
+			ctx.lineWidth = 1.1;
+			ctx.stroke();
+		}
+	}
+
+	function frame(now) {
+		mx = lerp(mx, tx, 0.06);
+		my = lerp(my, ty, 0.06);
+		const target = SCENE_META[sceneIdx];
+		for (let i = 0; i < 3; i++) {
+			curA[i] = lerp(curA[i], target.accent[i], 0.03);
+			curB[i] = lerp(curB[i], target.secondary[i], 0.03);
+		}
+		const rgbA = `${curA[0] | 0}, ${curA[1] | 0}, ${curA[2] | 0}`;
+		const rgbB = `${curB[0] | 0}, ${curB[1] | 0}, ${curB[2] | 0}`;
+
+		ctx.clearRect(0, 0, W, H);
+
+		// 1. Volumetric aurora nebulae
+		const g1 = ctx.createRadialGradient(
+			W * (0.28 + Math.sin(now * 0.0004) * 0.08 + mx * 0.05),
+			H * (0.24 + Math.cos(now * 0.0005) * 0.06),
+			10, W * 0.3, H * 0.25, W * 0.65
+		);
+		g1.addColorStop(0, `rgba(${rgbA}, 0.24)`);
+		g1.addColorStop(1, "rgba(0,0,0,0)");
+		ctx.fillStyle = g1;
+		ctx.fillRect(0, 0, W, H);
+
+		const g2 = ctx.createRadialGradient(
+			W * (0.76 + Math.cos(now * 0.00045) * 0.07 - mx * 0.05),
+			H * (0.34 + Math.sin(now * 0.00035) * 0.05),
+			10, W * 0.74, H * 0.35, W * 0.58
+		);
+		g2.addColorStop(0, `rgba(${rgbB}, 0.22)`);
+		g2.addColorStop(1, "rgba(0,0,0,0)");
+		ctx.fillStyle = g2;
+		ctx.fillRect(0, 0, W, H);
+
+		// 2. 3D Perspective Minecraft Horizon Grid gliding forward
+		const horizonY = H * 0.57 + my * 8;
+		const vanishX = W * 0.5 + mx * 24;
+		ctx.save();
+		ctx.beginPath();
+		ctx.rect(0, horizonY, W, H - horizonY);
+		ctx.clip();
+
+		// Horizontal perspective lines moving toward viewer
+		const speed = (now * 0.00035) % 1;
+		for (let i = 0; i < 12; i++) {
+			const p = Math.pow((i + speed) / 12, 2.15);
+			const y = horizonY + p * (H - horizonY);
+			const alpha = Math.min(0.32, p * 0.42);
+			ctx.strokeStyle = `rgba(${rgbA}, ${alpha.toFixed(3)})`;
+			ctx.lineWidth = 1;
+			ctx.beginPath();
+			ctx.moveTo(0, y);
+			ctx.lineTo(W, y);
+			ctx.stroke();
+		}
+		// Vertical converging perspective beams
+		for (let i = -8; i <= 8; i++) {
+			const bottomX = vanishX + i * (W * 0.13);
+			const grad = ctx.createLinearGradient(vanishX, horizonY, bottomX, H);
+			grad.addColorStop(0, `rgba(${rgbB}, 0.02)`);
+			grad.addColorStop(0.5, `rgba(${rgbA}, 0.18)`);
+			grad.addColorStop(1, `rgba(${rgbA}, 0.03)`);
+			ctx.strokeStyle = grad;
+			ctx.lineWidth = 1;
+			ctx.beginPath();
+			ctx.moveTo(vanishX, horizonY);
+			ctx.lineTo(bottomX, H);
+			ctx.stroke();
+		}
+		ctx.restore();
+
+		// Horizon glow line
+		const hGlow = ctx.createLinearGradient(0, horizonY, W, horizonY);
+		hGlow.addColorStop(0, "rgba(0,0,0,0)");
+		hGlow.addColorStop(0.3, `rgba(${rgbA}, 0.35)`);
+		hGlow.addColorStop(0.7, `rgba(${rgbB}, 0.35)`);
+		hGlow.addColorStop(1, "rgba(0,0,0,0)");
+		ctx.strokeStyle = hGlow;
+		ctx.lineWidth = 1.4;
+		ctx.beginPath();
+		ctx.moveTo(0, horizonY);
+		ctx.lineTo(W, horizonY);
+		ctx.stroke();
+
+		// 3. Animated FPS Performance Waveform along the horizon
+		ctx.beginPath();
+		for (let x = 0; x <= W; x += 6) {
+			const nx = x / W;
+			const env = Math.sin(nx * Math.PI);
+			const wave =
+				Math.sin(nx * 10 - now * 0.0032) * 9 +
+				Math.sin(nx * 22 + now * 0.0021) * 4 +
+				Math.cos(nx * 5 - now * 0.0014) * 6;
+			const y = horizonY - 8 + wave * env;
+			if (x === 0) ctx.moveTo(x, y);
+			else ctx.lineTo(x, y);
+		}
+		ctx.strokeStyle = `rgba(${rgbA}, 0.42)`;
+		ctx.lineWidth = 1.6;
+		ctx.stroke();
+
+		// 4. Floating luminous embers & stars
+		for (const p of particles) {
+			p.y -= p.vy;
+			p.x += p.vx;
+			if (p.y < -0.05) { p.y = 1.05; p.x = Math.random(); }
+			if (p.x < -0.05) p.x = 1.05;
+			if (p.x > 1.05) p.x = -0.05;
+			const twinkle = 0.55 + 0.45 * Math.sin(now * 0.003 + p.phase);
+			ctx.beginPath();
+			ctx.arc(p.x * W + mx * 8, p.y * H + my * 6, p.r, 0, Math.PI * 2);
+			ctx.fillStyle = `rgba(226, 240, 255, ${(p.alpha * twinkle).toFixed(3)})`;
+			ctx.fill();
+		}
+
+		// 5. Rotating 3D Voxel Minecraft Cubes
+		for (const c of cubes) drawCube(c, now);
+
+		if (!reducedMotion) requestAnimationFrame(frame);
+	}
+
+	requestAnimationFrame(frame);
+}
+initCinema();
 
 // ------------------------------------------------------------------ Interactive FPS Benchmark Presets
 const FPS_PRESETS = {
