@@ -6,7 +6,7 @@ Official website for **Nimbus Client & Nimbus Launcher**, ready for 1-click depl
 - **Automatic Latest Version Download:** Pulls `NimbusSetup.exe` & `NimbusLauncher.exe` dynamically from `watrak77-prog/nimbus-launcher` GitHub Releases (with clean `/download` and `/download/portable` redirect URLs).
 - **Live Download Counter:** Starts at `1789` (`BASE_DOWNLOADS`) + real cumulative `.exe` download counts across all GitHub Releases via Vercel Edge-cached serverless API (`/api/release`).
 - **Interactive Client Preview:** Visitors can toggle live HUD widgets (FPS, CPS, Coords, Keystrokes, Potions, Waypoints), switch to the In-Game Title Screen or Launcher mockup, and compare FPS presets.
-- **PL / EN Language Switcher**, searchable 36+ built-in modules catalog, official Minecraft version artwork, live GitHub Changelog, and FAQ.
+- **Searchable 36+ built-in modules catalog**, official Minecraft version artwork, live GitHub Changelog, and FAQ.
 
 ## Deploy on Vercel
 1. Go to [vercel.com/new](https://vercel.com/new) and import **`watrak77-prog/nimbus-web`**.

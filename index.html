@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="pl">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nimbus Client — Nowoczesny Klient i Launcher Minecraft (1.21.11 – 26.3)</title>
-<meta name="description" content="Nimbus Client to darmowy, ultraszybki klient i launcher Minecraft na Fabric (1.21.11 – 26.3). 60+ wbudowanych modułów PvP i HUD, stos FPS, Waypointy, własne skiny i pelerynki, Host World i Modrinth Explorer.">
+<title>Nimbus Client — Modern Fabric Minecraft Client &amp; Launcher (1.21.11 – 26.3)</title>
+<meta name="description" content="Nimbus Client is a free, ultra-fast Fabric Minecraft client & launcher (1.21.11 – 26.3). 60+ built-in PvP & HUD modules, automatic FPS stack, pixel-locked Waypoints, custom Skins & Capes, Host World, and Modrinth Explorer.">
 <meta name="theme-color" content="#0a0c12">
-<meta property="og:title" content="Nimbus Client — Klient i Launcher Minecraft">
-<meta property="og:description" content="60+ wbudowanych modułów, stos FPS (Sodium + Lithium), Waypointy, skiny i pelerynki, Host World oraz wbudowany Modrinth Explorer dla Minecraft 1.21.11 – 26.3.">
+<meta property="og:title" content="Nimbus Client — Modern Minecraft Client & Launcher">
+<meta property="og:description" content="60+ built-in modules, automatic Fabric FPS stack (Sodium + Lithium), Waypoints, custom Skins & Capes, Host World, and built-in Modrinth Explorer for Minecraft 1.21.11 – 26.3.">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,21 +29,20 @@
 		</a>
 
 		<nav class="nav-links" id="nav-links">
-			<a href="#features" data-i18n="nav_features">Funkcje</a>
-			<a href="#modules" data-i18n="nav_modules">Moduły</a>
-			<a href="#versions" data-i18n="nav_versions">Wersje</a>
-			<a href="#changelog" data-i18n="nav_changelog">Zmiany</a>
-			<a href="#faq" data-i18n="nav_faq">FAQ</a>
+			<a href="#features">Features</a>
+			<a href="#modules">Modules</a>
+			<a href="#versions">Versions</a>
+			<a href="#changelog">Changelog</a>
+			<a href="#faq">FAQ</a>
 		</nav>
 
 		<div class="nav-actions">
-			<button class="lang-btn" id="lang-toggle" title="Switch language">PL</button>
 			<a class="gh-btn" href="https://github.com/watrak77-prog/nimbus-launcher" target="_blank" rel="noopener" aria-label="GitHub">
 				<svg viewBox="0 0 24 24"><use href="#i-github"/></svg>
 			</a>
 			<a class="btn-nav-dl js-dl-setup" href="/download">
 				<svg viewBox="0 0 24 24"><use href="#i-download"/></svg>
-				<span data-i18n="nav_download">Pobierz</span>
+				<span>Download</span>
 				<span class="nav-ver" id="nav-ver">v1.0.13</span>
 			</a>
 			<button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -58,63 +57,63 @@
 			<div class="hero-copy">
 				<a class="release-pill" href="#changelog">
 					<span class="live-dot"></span>
-					<span id="hero-pill-text">Wersja v1.0.13 dostępna · Minecraft 1.21.11 – 26.3</span>
+					<span id="hero-pill-text">Version v1.0.13 live · Minecraft 1.21.11 – 26.3</span>
 					<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 				</a>
 
-				<h1 class="hero-title" data-i18n-html="hero_title">
-					Minecraft szybszy.<br><span>Czystszy. Twój.</span>
+				<h1 class="hero-title">
+					Play Minecraft Faster.<br><span>Cleaner. Yours.</span>
 				</h1>
 
-				<p class="hero-sub" data-i18n="hero_sub">
-					Nowoczesny klient i launcher Minecraft na Fabric inspirowany najlepszymi klientami PvP — 60+ wbudowanych modułów, stos FPS, pixel-locked Waypointy, własne skiny i pelerynki oraz Modrinth Explorer. Całkowicie za darmo, bez paywalli.
+				<p class="hero-sub">
+					A modern Fabric Minecraft client &amp; launcher inspired by top PvP clients — 60+ built-in modules, automatic FPS stack, pixel-locked Waypoints, custom Skins &amp; Capes, and Modrinth Explorer. 100% free, zero paywalls.
 				</p>
 
 				<div class="cta-row">
 					<a class="btn-primary js-dl-setup" id="dl-setup" href="/download">
 						<svg viewBox="0 0 24 24"><use href="#i-windows"/></svg>
 						<div class="btn-col">
-							<strong data-i18n="dl_setup_title">Pobierz Instalator</strong>
+							<strong>Download Installer</strong>
 							<span id="dl-setup-meta">NimbusSetup.exe · Windows 10/11</span>
 						</div>
 					</a>
 					<a class="btn-secondary js-dl-portable" id="dl-portable" href="/download/portable">
 						<svg viewBox="0 0 24 24"><use href="#i-download"/></svg>
 						<div class="btn-col">
-							<strong data-i18n="dl_portable_title">Wersja Portable</strong>
-							<span id="dl-portable-meta">NimbusLauncher.exe · Bez instalacji</span>
+							<strong>Portable Build</strong>
+							<span id="dl-portable-meta">NimbusLauncher.exe · No install needed</span>
 						</div>
 					</a>
 				</div>
 
 				<div class="hero-meta-links">
-					<span><svg viewBox="0 0 24 24"><use href="#i-shield"/></svg> <span data-i18n="meta_safe">Nie dotyka folderu .minecraft (read-only)</span></span>
-					<span><svg viewBox="0 0 24 24"><use href="#i-bolt"/></svg> <span data-i18n="meta_autoupdate">Auto-aktualizacje przez GitHub</span></span>
+					<span><svg viewBox="0 0 24 24"><use href="#i-shield"/></svg> Never modifies .minecraft (read-only)</span>
+					<span><svg viewBox="0 0 24 24"><use href="#i-bolt"/></svg> Auto-updates via GitHub Releases</span>
 				</div>
 
 				<!-- Live Stats Strip -->
 				<div class="stats-bar">
 					<div class="stat-item">
 						<div class="stat-val-row">
-							<span class="stat-val" id="stat-downloads">1 789</span>
+							<span class="stat-val" id="stat-downloads">1,789</span>
 							<span class="stat-plus">+</span>
 						</div>
-						<div class="stat-lbl" data-i18n="stat_downloads">Pobrań</div>
+						<div class="stat-lbl">Downloads</div>
 					</div>
 					<div class="stat-div"></div>
 					<div class="stat-item">
 						<div class="stat-val">6</div>
-						<div class="stat-lbl" data-i18n="stat_versions">Wersji MC (1.21–26.3)</div>
+						<div class="stat-lbl">MC Versions (1.21–26.3)</div>
 					</div>
 					<div class="stat-div"></div>
 					<div class="stat-item">
 						<div class="stat-val">60+</div>
-						<div class="stat-lbl" data-i18n="stat_modules">Wbudowanych modułów</div>
+						<div class="stat-lbl">Built-in Modules</div>
 					</div>
 					<div class="stat-div"></div>
 					<div class="stat-item">
 						<div class="stat-val green">100%</div>
-						<div class="stat-lbl" data-i18n="stat_free">Darmowy</div>
+						<div class="stat-lbl">Free Forever</div>
 					</div>
 				</div>
 			</div>
@@ -124,9 +123,9 @@
 				<div class="showcase-chrome">
 					<div class="chrome-dots"><span></span><span></span><span></span></div>
 					<div class="showcase-tabs" role="tablist">
-						<button class="sc-tab active" data-sc="hud" data-i18n="sc_tab_hud">HUD w grze</button>
-						<button class="sc-tab" data-sc="menu" data-i18n="sc_tab_menu">Menu główne</button>
-						<button class="sc-tab" data-sc="launcher" data-i18n="sc_tab_launcher">Launcher</button>
+						<button class="sc-tab active" data-sc="hud">In-Game HUD</button>
+						<button class="sc-tab" data-sc="menu">Title Screen</button>
+						<button class="sc-tab" data-sc="launcher">Launcher</button>
 					</div>
 					<span class="chrome-ver" id="chrome-ver">1.21.11</span>
 				</div>
@@ -161,7 +160,7 @@
 						</div>
 					</div>
 					<div class="hud-toggles">
-						<span class="ht-label" data-i18n="sc_try">Przetestuj moduły:</span>
+						<span class="ht-label">Try modules:</span>
 						<button class="ht-chip on" data-hw="hw-fps">FPS</button>
 						<button class="ht-chip on" data-hw="hw-cps">CPS</button>
 						<button class="ht-chip on" data-hw="hw-coords">Coords</button>
@@ -234,13 +233,13 @@
 		<div class="container">
 			<div class="perf-panel">
 				<div class="perf-copy">
-					<span class="eyebrow" data-i18n="perf_eye">OPTYMALIZACJA FABRIC</span>
-					<h2 data-i18n="perf_title">Wbudowany stos FPS, który działa od pierwszego kliknięcia</h2>
-					<p data-i18n="perf_desc">Nimbus automatycznie dobiera i aktualizuje Sodium, Lithium, FerriteCore, EntityCulling, MoreCulling i ImmediatelyFast dla każdej wersji Minecraft — zero ręcznego szukania kompatybilnych plików .jar.</p>
+					<span class="eyebrow">FABRIC OPTIMIZATION</span>
+					<h2>Built-in FPS stack that works out of the box</h2>
+					<p>Nimbus automatically fetches and updates Sodium, Lithium, FerriteCore, EntityCulling, MoreCulling, and ImmediatelyFast per Minecraft version — with automatic mod conflict checks.</p>
 					<div class="perf-presets">
-						<button class="pp-btn" data-preset="laptop" data-i18n="perf_laptop">Laptop / iGPU</button>
-						<button class="pp-btn active" data-preset="mid" data-i18n="perf_mid">Średni PC</button>
-						<button class="pp-btn" data-preset="high" data-i18n="perf_high">Gaming PC</button>
+						<button class="pp-btn" data-preset="laptop">Laptop / iGPU</button>
+						<button class="pp-btn active" data-preset="mid">Mid-Range PC</button>
+						<button class="pp-btn" data-preset="high">Gaming PC</button>
 					</div>
 				</div>
 				<div class="perf-bars">
@@ -249,16 +248,16 @@
 							<span class="pbar-name nimbus"><svg viewBox="0 0 24 24"><use href="#i-logo"/></svg> Nimbus Client (Fabric FPS Stack)</span>
 							<strong class="pbar-val green" id="fps-nimbus">480 FPS</strong>
 						</div>
-						<div class="pbar-track"><div class="pbar-fill green" id="bar-nimbus" style="width:94%"></div></div>
+						<div class="pbar-track"><div class="pbar-fill green" id="bar-nimbus" style="width:92%"></div></div>
 					</div>
 					<div class="pbar-item">
 						<div class="pbar-head">
 							<span class="pbar-name">Vanilla Minecraft</span>
 							<strong class="pbar-val" id="fps-vanilla">135 FPS</strong>
 						</div>
-						<div class="pbar-track"><div class="pbar-fill muted" id="bar-vanilla" style="width:28%"></div></div>
+						<div class="pbar-track"><div class="pbar-fill muted" id="bar-vanilla" style="width:26%"></div></div>
 					</div>
-					<div class="perf-note" data-i18n="perf_note">* Wartości orientacyjne (12 chunków, 1080p, świat singleplayer) — realny przyrost zależy od karty graficznej i procesora.</div>
+					<div class="perf-note">* Illustrative benchmarks (12 render distance, 1080p singleplayer) — actual gains depend on your CPU &amp; GPU.</div>
 				</div>
 			</div>
 		</div>
@@ -268,41 +267,41 @@
 	<section class="section" id="features">
 		<div class="container">
 			<div class="sec-head">
-				<span class="eyebrow" data-i18n="feat_eye">DLACZEGO NIMBUS</span>
-				<h2 data-i18n="feat_title">Wszystko, czego potrzebujesz — w jednym lekkim kliencie</h2>
-				<p data-i18n="feat_sub">Zaprojektowany od zera bez zbędnego obciążenia, w pełni zgodny z ekosystemem Fabric i Modrinth.</p>
+				<span class="eyebrow">WHY NIMBUS</span>
+				<h2>Everything you need — in one lightweight client</h2>
+				<p>Built from the ground up with zero bloat, fully compatible with the Fabric &amp; Modrinth ecosystem.</p>
 			</div>
 
 			<div class="bento">
 				<article class="b-card">
 					<div class="b-ico green"><svg viewBox="0 0 24 24"><use href="#i-bolt"/></svg></div>
-					<h3 data-i18n="f1_t">Inteligentny stos FPS</h3>
-					<p data-i18n="f1_d">Sodium, Lithium, FerriteCore, EntityCulling, MoreCulling i ImmediatelyFast zarządzane osobno dla każdej wersji, z automatycznym wykrywaniem konfliktów.</p>
+					<h3>Smart FPS Stack</h3>
+					<p>Sodium, Lithium, FerriteCore, EntityCulling, MoreCulling, and ImmediatelyFast managed per version with automatic compatibility checks.</p>
 				</article>
 				<article class="b-card">
 					<div class="b-ico blue"><svg viewBox="0 0 24 24"><use href="#i-layers"/></svg></div>
-					<h3 data-i18n="f2_t">Edytor HUD i 60+ modułów</h3>
-					<p data-i18n="f2_d">Przeciągaj elementy HUD z przyciąganiem do linii, skaluj kółkiem myszy, twórz profile ustawień i personalizuj wygląd jednym klawiszem.</p>
+					<h3>HUD Editor &amp; 60+ Modules</h3>
+					<p>Drag HUD elements with snap guides, scroll to resize, switch setting profiles, and customize everything with Right Shift.</p>
 				</article>
 				<article class="b-card">
 					<div class="b-ico purple"><svg viewBox="0 0 24 24"><use href="#i-pin"/></svg></div>
-					<h3 data-i18n="f3_t">Płynne Waypointy i Team View</h3>
-					<p data-i18n="f3_d">Waypointy z dokładną projekcją kamery (zero drgania), automatyczne punkty śmierci oraz wsparcie dla Team View na Hypixelu.</p>
+					<h3>Smooth Waypoints &amp; Team View</h3>
+					<p>Exact camera-projected waypoints (zero jitter), automatic death markers, and Hypixel Team View integration.</p>
 				</article>
 				<article class="b-card">
 					<div class="b-ico amber"><svg viewBox="0 0 24 24"><use href="#i-shirt"/></svg></div>
-					<h3 data-i18n="f4_t">Własne skiny i 50+ pelerynek</h3>
-					<p data-i18n="f4_d">Ustaw skina dowolnego gracza lub wgraj własny plik PNG bezpośrednio w launcherze albo w grze — plus kolekcja ponad 50 oficjalnych pelerynek.</p>
+					<h3>Custom Skins &amp; 50+ Capes</h3>
+					<p>Wear any premium player's skin or upload your own PNG right from the launcher or in-game — plus 50+ official Minecraft capes.</p>
 				</article>
 				<article class="b-card">
 					<div class="b-ico cyan"><svg viewBox="0 0 24 24"><use href="#i-globe"/></svg></div>
-					<h3 data-i18n="f5_t">Host World i Tunel Proxy</h3>
-					<p data-i18n="f5_d">Udostępniaj swój świat singleplayer znajomym przez internet jednym kliknięciem (e4mc / UPnP) oraz łącz się z serwerami przez SOCKS5/HTTP proxy.</p>
+					<h3>Host World &amp; Proxy Tunnel</h3>
+					<p>Host singleplayer worlds over the internet in 1 click (e4mc / UPnP) and connect to servers through SOCKS5/HTTP proxies.</p>
 				</article>
 				<article class="b-card">
 					<div class="b-ico rose"><svg viewBox="0 0 24 24"><use href="#i-puzzle"/></svg></div>
-					<h3 data-i18n="f6_t">Modrinth, Profile i Backupy</h3>
-					<p data-i18n="f6_d">Instaluj mody, paczki tekstur i shadery prosto z Modrinth, twórz izolowane profile modów, uruchamiaj wybrane światy i rób kopie .zip 1 kliknięciem.</p>
+					<h3>Modrinth, Profiles &amp; Backups</h3>
+					<p>Install Mods, Resource Packs, and Shaders straight from Modrinth, create isolated mod profiles, launch worlds directly, and zip backups.</p>
 				</article>
 			</div>
 		</div>
@@ -312,21 +311,21 @@
 	<section class="section" id="modules">
 		<div class="container">
 			<div class="sec-head">
-				<span class="eyebrow" data-i18n="mod_eye">WBUDOWANE MODUŁY</span>
-				<h2 data-i18n="mod_title">Ponad 60 modułów gotowych od razu po instalacji</h2>
+				<span class="eyebrow">BUILT-IN MODULES</span>
+				<h2>Over 60 modules ready right after install</h2>
 			</div>
 
 			<div class="mod-toolbar">
 				<div class="mod-cats" id="mod-cats">
-					<button class="mc-cat active" data-cat="all" data-i18n="cat_all">Wszystkie</button>
+					<button class="mc-cat active" data-cat="all">All</button>
 					<button class="mc-cat" data-cat="hud">HUD</button>
 					<button class="mc-cat" data-cat="render">Render</button>
-					<button class="mc-cat" data-cat="mechanic" data-i18n="cat_mech">Mechaniki</button>
+					<button class="mc-cat" data-cat="mechanic">Mechanics</button>
 					<button class="mc-cat" data-cat="perf">FPS Stack</button>
 				</div>
 				<div class="mod-search-wrap">
 					<svg viewBox="0 0 24 24"><use href="#i-search"/></svg>
-					<input id="mod-search" type="search" placeholder="Szukaj modułu (np. Waypoints, Zoom)…" autocomplete="off">
+					<input id="mod-search" type="search" placeholder="Search modules (e.g. Waypoints, Zoom)…" autocomplete="off">
 				</div>
 			</div>
 
@@ -338,9 +337,9 @@
 	<section class="section" id="versions">
 		<div class="container">
 			<div class="sec-head">
-				<span class="eyebrow" data-i18n="ver_eye">WSPARCIE WERSJI</span>
-				<h2 data-i18n="ver_title">Jedna aplikacja na najnowsze wersje Minecrafta</h2>
-				<p data-i18n="ver_sub">Każda wersja Nimbusa ma własny, odizolowany zestaw modów Fabric — a launcher pozwala też uruchamiać starsze wersje Vanilla i Fabric.</p>
+				<span class="eyebrow">VERSION SUPPORT</span>
+				<h2>One client for the newest Minecraft releases</h2>
+				<p>Each Nimbus version gets its own isolated Fabric mods folder — and the launcher also runs older Vanilla &amp; Fabric versions.</p>
 			</div>
 
 			<div class="ver-grid">
@@ -408,17 +407,17 @@
 		<div class="container">
 			<div class="sec-head-row">
 				<div>
-					<span class="eyebrow" data-i18n="ch_eye">HISTORIA WYDAŃ</span>
-					<h2 data-i18n="ch_title">Ostatnie aktualizacje na żywo z GitHub</h2>
+					<span class="eyebrow">RELEASE HISTORY</span>
+					<h2>Live changelog straight from GitHub</h2>
 				</div>
 				<a class="btn-outline" href="https://github.com/watrak77-prog/nimbus-launcher/releases" target="_blank" rel="noopener">
 					<svg viewBox="0 0 24 24"><use href="#i-github"/></svg>
-					<span data-i18n="ch_all">Wszystkie wydania</span>
+					<span>All Releases</span>
 				</a>
 			</div>
 
 			<div class="changelog-list" id="changelog-list">
-				<div class="ch-skeleton">Ładowanie najnowszych wydań z GitHub…</div>
+				<div class="ch-skeleton">Loading latest releases from GitHub…</div>
 			</div>
 		</div>
 	</section>
@@ -429,46 +428,46 @@
 			<div class="steps-row">
 				<div class="step-card">
 					<span class="step-num">01</span>
-					<h3 data-i18n="s1_t">Pobierz instalator</h3>
-					<p data-i18n="s1_d">Kliknij „Pobierz Instalator” (NimbusSetup.exe) albo wybierz wersję Portable bez instalacji.</p>
+					<h3>Download Installer</h3>
+					<p>Click Download Installer (NimbusSetup.exe) or grab the zero-install Portable .exe build.</p>
 				</div>
 				<div class="step-card">
 					<span class="step-num">02</span>
-					<h3 data-i18n="s2_t">Wybierz nick i wersję</h3>
-					<p data-i18n="s2_d">Launcher automatycznie zaimportuje Twoje serwery i ustawienia z .minecraft (tylko do odczytu).</p>
+					<h3>Pick Nickname &amp; Version</h3>
+					<p>The launcher imports your servers and settings from .minecraft safely in read-only mode.</p>
 				</div>
 				<div class="step-card">
 					<span class="step-num">03</span>
-					<h3 data-i18n="s3_t">Graj z pełnym FPS</h3>
-					<p data-i18n="s3_d">Kliknij LAUNCH GAME — Fabric, Java i mody wydajnościowe pobiorą się same. W grze wciśnij prawy Shift.</p>
+					<h3>Play at Full FPS</h3>
+					<p>Hit LAUNCH GAME — Fabric, Java, and performance mods install automatically. Press Right Shift in-game.</p>
 				</div>
 			</div>
 
 			<div class="sec-head faq-head">
 				<span class="eyebrow">FAQ</span>
-				<h2 data-i18n="faq_title">Najczęściej zadawane pytania</h2>
+				<h2>Frequently Asked Questions</h2>
 			</div>
 
 			<div class="faq-list">
 				<details class="faq-item" open>
-					<summary data-i18n="q1">Czy Nimbus Client modyfikuje mój folder .minecraft?</summary>
-					<p data-i18n="a1">Nie! Folder .minecraft jest traktowany wyłącznie do odczytu (read-only). Wszystkie pliki, mody, konfiguracje i światy Nimbusa zapisują się w osobnym, bezpiecznym katalogu ~/.nimbusclient.</p>
+					<summary>Does Nimbus Client modify my .minecraft folder?</summary>
+					<p>Never! Your .minecraft directory is strictly read-only. All Nimbus files, mods, profiles, configs, and worlds live in an isolated ~/.nimbusclient folder.</p>
 				</details>
 				<details class="faq-item">
-					<summary data-i18n="q2">Windows SmartScreen pokazał komunikat „System Windows ochronił ten komputer” — czy plik jest bezpieczny?</summary>
-					<p data-i18n="a2">Tak. Komunikat SmartScreen pojawia się w Windows przy każdym nowym programie indie, który nie posiada płatnego certyfikatu EV (kosztującego kilka tysięcy zł rocznie). Wystarczy kliknąć „Więcej informacji” → „Uruchom mimo to”. Wszystkie wydania są publikowane bezpośrednio w publicznym repozytorium GitHub.</p>
+					<summary>Windows SmartScreen showed "Windows protected your PC" — is it safe?</summary>
+					<p>Yes. Windows SmartScreen warns on indie executables that are not signed with an expensive EV certificate. Click "More info" → "Run anyway". Every build is published openly on GitHub Releases.</p>
 				</details>
 				<details class="faq-item">
-					<summary data-i18n="q3">Czy potrzebuję konta premium Minecraft, żeby korzystać z Nimbusa?</summary>
-					<p data-i18n="a3">Nie — launcher obsługuje konta offline (non-premium), dzięki czemu możesz grać w singleplayer oraz na serwerach non-premium, a dodatkowo ustawić własnego skina i pelerynkę w zakładce Skins.</p>
+					<summary>Do I need a premium Minecraft account to use Nimbus?</summary>
+					<p>No — the launcher supports offline accounts for singleplayer and non-premium servers, complete with custom PNG or player skins and 50+ capes.</p>
 				</details>
 				<details class="faq-item">
-					<summary data-i18n="q4">Jak aktualizować Nimbus Launcher i moda w środku?</summary>
-					<p data-i18n="a4">Launcher automatycznie sprawdza najnowszy release na GitHubie przy każdym uruchomieniu (albo po kliknięciu „Check Updates” w Settings) i aktualizuje jednocześnie siebie oraz wszystkie 6 wersji moda Nimbus.</p>
+					<summary>How do updates work?</summary>
+					<p>The launcher automatically checks GitHub Releases on launch (or via Check Updates in Settings) and updates both itself and all 6 bundled Nimbus mod jars.</p>
 				</details>
 				<details class="faq-item">
-					<summary data-i18n="q5">Czy mogę dodawać własne mody Fabric, paczki tekstur i shadery?</summary>
-					<p data-i18n="a5">Tak! Możesz pobierać je 1 kliknięciem w zakładce Explore (Modrinth) albo po prostu przeciągnąć własne pliki .jar / .zip do zakładki Content. Dodatkowo możesz tworzyć osobne profile (np. PvP i Survival) z oddzielnymi modami.</p>
+					<summary>Can I add custom Fabric mods, resource packs, and shaders?</summary>
+					<p>Yes! Browse and install them in 1 click from Explore (Modrinth) or drag &amp; drop .jar / .zip files into Content. You can also create separate mod profiles (e.g. PvP vs Survival).</p>
 				</details>
 			</div>
 		</div>
@@ -479,13 +478,13 @@
 		<div class="container">
 			<div class="final-cta">
 				<svg class="fc-logo" viewBox="0 0 24 24"><use href="#i-logo"/></svg>
-				<h2 data-i18n="fc_title">Gotowy na płynniejszego Minecrafta?</h2>
-				<p data-i18n="fc_sub">Dołącz do graczy korzystających z Nimbus Client. Instalacja trwa mniej niż 30 sekund.</p>
+				<h2>Ready for a faster Minecraft?</h2>
+				<p>Join players running Nimbus Client. Setup takes under 30 seconds.</p>
 				<div class="cta-row center">
 					<a class="btn-primary js-dl-setup" href="/download">
 						<svg viewBox="0 0 24 24"><use href="#i-download"/></svg>
 						<div class="btn-col">
-							<strong data-i18n="dl_setup_title">Pobierz Instalator</strong>
+							<strong>Download Installer</strong>
 							<span class="js-ver-label">Nimbus Client · Windows 10/11</span>
 						</div>
 					</a>
@@ -507,12 +506,12 @@
 				<span class="brand-mark sm"><svg viewBox="0 0 24 24"><use href="#i-logo"/></svg></span>
 				<span class="brand-name"><strong>NIMBUS</strong> CLIENT</span>
 			</a>
-			<p class="f-disc" data-i18n="footer_disc">Nieoficjalny projekt Minecraft. Nie jest zatwierdzony przez ani powiązany z Mojang AB lub Microsoft.</p>
+			<p class="f-disc">Not an official Minecraft product. Not approved by or associated with Mojang AB or Microsoft.</p>
 		</div>
 		<div class="f-links">
-			<a href="#features" data-i18n="nav_features">Funkcje</a>
-			<a href="#modules" data-i18n="nav_modules">Moduły</a>
-			<a href="#changelog" data-i18n="nav_changelog">Zmiany</a>
+			<a href="#features">Features</a>
+			<a href="#modules">Modules</a>
+			<a href="#changelog">Changelog</a>
 			<a href="https://github.com/watrak77-prog/nimbus-launcher/releases" target="_blank" rel="noopener">GitHub</a>
 		</div>
 	</div>
