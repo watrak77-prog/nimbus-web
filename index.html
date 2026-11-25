@@ -69,7 +69,19 @@
 					Play Minecraft instantly with any nickname — no premium account required. Packed with 60+ built-in PvP &amp; HUD modules, an automatic Fabric FPS stack, custom Skins &amp; Capes, pixel-locked Waypoints, and 1-click Modrinth Explorer. 100% free forever.
 				</p>
 
-				<div class="cta-row">
+				<div class="os-switch" role="tablist" aria-label="Operating system">
+					<button class="os-tab active" data-os="win" role="tab" aria-selected="true">
+						<svg viewBox="0 0 24 24"><use href="#i-windows"/></svg>
+						<span>Windows 10/11</span>
+					</button>
+					<button class="os-tab" data-os="linux" role="tab" aria-selected="false">
+						<svg viewBox="0 0 24 24"><use href="#i-linux"/></svg>
+						<span>Linux Mint / Ubuntu</span>
+						<span class="os-new">NEW</span>
+					</button>
+				</div>
+
+				<div class="cta-row" id="cta-win">
 					<a class="btn-primary js-dl-setup" id="dl-setup" href="/download">
 						<svg viewBox="0 0 24 24"><use href="#i-windows"/></svg>
 						<div class="btn-col">
@@ -84,6 +96,29 @@
 							<span id="dl-portable-meta">NimbusLauncher.exe · No install needed</span>
 						</div>
 					</a>
+				</div>
+
+				<div class="cta-row os-hidden" id="cta-linux">
+					<a class="btn-primary js-dl-linux" id="dl-linux" href="/download/linux">
+						<svg viewBox="0 0 24 24"><use href="#i-linux"/></svg>
+						<div class="btn-col">
+							<strong>Download for Linux Mint (.deb)</strong>
+							<span id="dl-linux-meta">NimbusLauncher.deb · Mint / Ubuntu / Debian</span>
+						</div>
+					</a>
+					<a class="btn-secondary js-dl-linux-tar" id="dl-linux-tar" href="/download/linux-tar">
+						<svg viewBox="0 0 24 24"><use href="#i-download"/></svg>
+						<div class="btn-col">
+							<strong>Portable Archive (.tar.gz)</strong>
+							<span id="dl-linux-tar-meta">NimbusLauncher-linux.tar.gz · Any distro</span>
+						</div>
+					</a>
+				</div>
+
+				<div class="linux-cmd os-hidden" id="linux-cmd">
+					<span class="lc-lbl">Mint / Ubuntu:</span>
+					<code>sudo apt install ./NimbusLauncher.deb</code>
+					<button class="lc-copy" id="lc-copy" type="button" title="Copy command">Copy</button>
 				</div>
 
 				<div class="hero-meta-links">
@@ -425,6 +460,10 @@
 					<p>The launcher automatically checks GitHub Releases on launch (or via Check Updates in Settings) and updates both itself and all 6 bundled Nimbus mod jars.</p>
 				</details>
 				<details class="faq-item">
+					<summary>Does Nimbus Client work on Linux Mint / Ubuntu?</summary>
+					<p>Yes! Download <code>NimbusLauncher.deb</code> and double-click it on Linux Mint (or run <code>sudo apt install ./NimbusLauncher.deb</code>). It automatically installs GTK3/WebKit2 dependencies, adds Nimbus Client to your Start Menu, downloads Linux Java runtimes &amp; LWJGL natives automatically, and keeps everything isolated in <code>~/.nimbusclient</code>.</p>
+				</details>
+				<details class="faq-item">
 					<summary>Can I add custom Fabric mods, resource packs, and shaders?</summary>
 					<p>Yes! Browse and install them in 1 click from Explore (Modrinth) or drag &amp; drop .jar / .zip files into Content. You can also create separate mod profiles (e.g. PvP vs Survival).</p>
 				</details>
@@ -438,13 +477,20 @@
 			<div class="final-cta">
 				<svg class="fc-logo" viewBox="0 0 24 24"><use href="#i-logo"/></svg>
 				<h2>Ready for a faster Minecraft?</h2>
-				<p>Join players running Nimbus Client. Setup takes under 30 seconds.</p>
+				<p>Available natively for Windows 10/11 and Linux Mint / Ubuntu. Setup takes under 30 seconds.</p>
 				<div class="cta-row center">
 					<a class="btn-primary js-dl-setup" href="/download">
-						<svg viewBox="0 0 24 24"><use href="#i-download"/></svg>
+						<svg viewBox="0 0 24 24"><use href="#i-windows"/></svg>
 						<div class="btn-col">
-							<strong>Download Installer</strong>
+							<strong>Download for Windows</strong>
 							<span class="js-ver-label">Nimbus Client · Windows 10/11</span>
+						</div>
+					</a>
+					<a class="btn-secondary js-dl-linux" href="/download/linux">
+						<svg viewBox="0 0 24 24"><use href="#i-linux"/></svg>
+						<div class="btn-col">
+							<strong>Download for Linux Mint (.deb)</strong>
+							<span class="js-linux-ver-label">NimbusLauncher.deb · Mint / Ubuntu</span>
 						</div>
 					</a>
 					<a class="btn-outline" href="https://github.com/watrak77-prog/nimbus-launcher/releases" target="_blank" rel="noopener">
@@ -487,6 +533,7 @@
 	</symbol>
 	<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 	<symbol id="i-windows" viewBox="0 0 24 24"><path d="M3 5.5l7.8-1.1v7.1H3zm8.8-1.2L21 3v8.5h-9.2zM3 12.5h7.8v7.1L3 18.5zm8.8 0H21V21l-9.2-1.3z" fill="currentColor"/></symbol>
+	<symbol id="i-linux" viewBox="0 0 24 24"><path d="M12 2.5c-2.6 0-4.3 2-4.3 4.8 0 1.4.2 2.7-.5 3.9-.9 1.6-2.3 3.2-2.3 5.2 0 1.9 1.1 3.1 2.5 3.6.5.9 1.6 1.5 2.8 1.5 1.1 0 1.8-.4 1.8-.4s.7.4 1.8.4c1.2 0 2.3-.6 2.8-1.5 1.4-.5 2.5-1.7 2.5-3.6 0-2-1.4-3.6-2.3-5.2-.7-1.2-.5-2.5-.5-3.9 0-2.8-1.7-4.8-4.3-4.8zm-1.6 4.4a.85.85 0 1 1 0 1.7.85.85 0 0 1 0-1.7zm3.2 0a.85.85 0 1 1 0 1.7.85.85 0 0 1 0-1.7zM12 9.4c1 0 2 .5 2 1s-1 1.1-2 1.1-2-.6-2-1.1 1-1 2-1zm0 3.2c2 0 3.3 1.7 3.3 3.9 0 1.8-1.1 3-3.3 3s-3.3-1.2-3.3-3c0-2.2 1.3-3.9 3.3-3.9z" fill="currentColor"/></symbol>
 	<symbol id="i-github" viewBox="0 0 24 24"><path d="M12 2.2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2.2z" fill="currentColor"/></symbol>
 	<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M14 2L4 14h7l-2 8 11-14h-7z" fill="currentColor"/></symbol>
 	<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M3 12.5l9 5 9-5M3 16.5l9 5 9-5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>

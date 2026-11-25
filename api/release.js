@@ -37,7 +37,7 @@ module.exports = async function handler(req, res) {
 		for (const r of published) {
 			for (const a of r.assets || []) {
 				const n = String(a.name || "").toLowerCase();
-				if (n.endsWith(".exe")) {
+				if (n.endsWith(".exe") || n.endsWith(".deb") || n.endsWith(".tar.gz")) {
 					githubDownloads += Number(a.download_count || 0);
 				}
 			}
@@ -54,11 +54,13 @@ module.exports = async function handler(req, res) {
 				notes: top.body || "",
 				setup: pickAsset(top.assets, "NimbusSetup.exe"),
 				portable: pickAsset(top.assets, "NimbusLauncher.exe"),
+				linuxDeb: pickAsset(top.assets, "NimbusLauncher.deb"),
+				linuxTar: pickAsset(top.assets, "NimbusLauncher-linux.tar.gz"),
 			}
 			: {
-				tag: "v1.0.13",
-				version: "1.0.13",
-				name: "Nimbus Launcher 1.0.13",
+				tag: "v1.0.15",
+				version: "1.0.15",
+				name: "Nimbus Launcher 1.0.15",
 				published_at: new Date().toISOString(),
 				url: `https://github.com/${REPO}/releases/latest`,
 				notes: "",
@@ -71,6 +73,18 @@ module.exports = async function handler(req, res) {
 				portable: {
 					name: "NimbusLauncher.exe",
 					url: `https://github.com/${REPO}/releases/latest/download/NimbusLauncher.exe`,
+					size: 0,
+					downloads: 0,
+				},
+				linuxDeb: {
+					name: "NimbusLauncher.deb",
+					url: `https://github.com/${REPO}/releases/latest/download/NimbusLauncher.deb`,
+					size: 0,
+					downloads: 0,
+				},
+				linuxTar: {
+					name: "NimbusLauncher-linux.tar.gz",
+					url: `https://github.com/${REPO}/releases/latest/download/NimbusLauncher-linux.tar.gz`,
 					size: 0,
 					downloads: 0,
 				},
@@ -101,9 +115,9 @@ module.exports = async function handler(req, res) {
 			totalDownloads: BASE_DOWNLOADS,
 			fallback: true,
 			latest: {
-				tag: "v1.0.13",
-				version: "1.0.13",
-				name: "Nimbus Launcher 1.0.13",
+				tag: "v1.0.15",
+				version: "1.0.15",
+				name: "Nimbus Launcher 1.0.15",
 				published_at: null,
 				url: `https://github.com/${REPO}/releases/latest`,
 				notes: "Latest Nimbus Client & Launcher release.",
@@ -116,6 +130,18 @@ module.exports = async function handler(req, res) {
 				portable: {
 					name: "NimbusLauncher.exe",
 					url: `https://github.com/${REPO}/releases/latest/download/NimbusLauncher.exe`,
+					size: 0,
+					downloads: 0,
+				},
+				linuxDeb: {
+					name: "NimbusLauncher.deb",
+					url: `https://github.com/${REPO}/releases/latest/download/NimbusLauncher.deb`,
+					size: 0,
+					downloads: 0,
+				},
+				linuxTar: {
+					name: "NimbusLauncher-linux.tar.gz",
+					url: `https://github.com/${REPO}/releases/latest/download/NimbusLauncher-linux.tar.gz`,
 					size: 0,
 					downloads: 0,
 				},

@@ -3,7 +3,9 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/download", "destination": "/api/download?type=setup" },
-    { "source": "/download/portable", "destination": "/api/download?type=portable" }
+    { "source": "/download/portable", "destination": "/api/download?type=portable" },
+    { "source": "/download/linux", "destination": "/api/download?type=linux" },
+    { "source": "/download/linux-tar", "destination": "/api/download?type=linux-tar" }
   ],
   "headers": [
     {

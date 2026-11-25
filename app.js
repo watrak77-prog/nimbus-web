@@ -432,16 +432,21 @@ function showToast(msg) {
 
 function renderReleaseData(data) {
 	const latest = data.latest || {};
-	const tag = latest.tag || "v1.0.13";
+	const tag = latest.tag || "v1.0.15";
 
 	$("nav-ver").textContent = tag;
-	$("hero-pill-text").textContent = `Version ${tag} live · Minecraft 1.21.11 – 26.3`;
+	$("hero-pill-text").textContent = `Version ${tag} live · Windows & Linux Mint · MC 1.21.11 – 26.3`;
 	document.querySelectorAll(".js-ver-label").forEach((el) => {
 		el.textContent = `Nimbus Client ${tag} · Windows 10/11`;
+	});
+	document.querySelectorAll(".js-linux-ver-label").forEach((el) => {
+		el.textContent = `NimbusLauncher.deb · ${tag} · Mint / Ubuntu`;
 	});
 
 	const setup = latest.setup;
 	const portable = latest.portable;
+	const linuxDeb = latest.linuxDeb;
+	const linuxTar = latest.linuxTar;
 	if (setup && setup.url) {
 		document.querySelectorAll(".js-dl-setup").forEach((a) => { a.href = setup.url; });
 		const sz = fmtMB(setup.size);
@@ -451,6 +456,16 @@ function renderReleaseData(data) {
 		document.querySelectorAll(".js-dl-portable").forEach((a) => { a.href = portable.url; });
 		const sz = fmtMB(portable.size);
 		$("dl-portable-meta").textContent = `NimbusLauncher.exe · ${tag}${sz ? " · " + sz : ""}`;
+	}
+	if (linuxDeb && linuxDeb.url) {
+		document.querySelectorAll(".js-dl-linux").forEach((a) => { a.href = linuxDeb.url; });
+		const sz = fmtMB(linuxDeb.size);
+		if ($("dl-linux-meta")) $("dl-linux-meta").textContent = `NimbusLauncher.deb · ${tag}${sz ? " · " + sz : ""}`;
+	}
+	if (linuxTar && linuxTar.url) {
+		document.querySelectorAll(".js-dl-linux-tar").forEach((a) => { a.href = linuxTar.url; });
+		const sz = fmtMB(linuxTar.size);
+		if ($("dl-linux-tar-meta")) $("dl-linux-tar-meta").textContent = `NimbusLauncher-linux.tar.gz · ${tag}${sz ? " · " + sz : ""}`;
 	}
 
 	const localClicks = Number(localStorage.getItem("nimbus_dl_bump") || 0);
@@ -498,7 +513,8 @@ async function fetchRelease() {
 		let ghDl = 0;
 		for (const r of list) {
 			for (const a of r.assets || []) {
-				if (String(a.name || "").toLowerCase().endsWith(".exe")) ghDl += Number(a.download_count || 0);
+				const n = String(a.name || "").toLowerCase();
+				if (n.endsWith(".exe") || n.endsWith(".deb") || n.endsWith(".tar.gz")) ghDl += Number(a.download_count || 0);
 			}
 		}
 		const top = list[0];
@@ -512,6 +528,7 @@ async function fetchRelease() {
 				tag: top.tag_name, version: top.tag_name.replace(/^v/i, ""), published_at: top.published_at,
 				url: top.html_url, notes: top.body || "",
 				setup: pick("NimbusSetup.exe"), portable: pick("NimbusLauncher.exe"),
+				linuxDeb: pick("NimbusLauncher.deb"), linuxTar: pick("NimbusLauncher-linux.tar.gz"),
 			} : {},
 			releases: list.slice(0, 6).map((r) => ({
 				tag: r.tag_name, version: r.tag_name.replace(/^v/i, ""),
@@ -519,12 +536,40 @@ async function fetchRelease() {
 			})),
 		});
 	} catch {
-		renderReleaseData({ totalDownloads: BASE_DOWNLOADS, latest: { tag: "v1.0.13", version: "1.0.13" }, releases: [] });
+		renderReleaseData({ totalDownloads: BASE_DOWNLOADS, latest: { tag: "v1.0.15", version: "1.0.15" }, releases: [] });
 	}
 }
 
+// OS Platform Switcher (auto-detects Linux Mint / Ubuntu)
+function setOsTab(os) {
+	const isLin = os === "linux";
+	document.querySelectorAll(".os-tab").forEach((b) => {
+		const on = b.dataset.os === (isLin ? "linux" : "win");
+		b.classList.toggle("active", on);
+		b.setAttribute("aria-selected", on ? "true" : "false");
+	});
+	$("cta-win").classList.toggle("os-hidden", isLin);
+	$("cta-linux").classList.toggle("os-hidden", !isLin);
+	$("linux-cmd").classList.toggle("os-hidden", !isLin);
+	const navDl = document.querySelector(".btn-nav-dl");
+	if (navDl) {
+		navDl.classList.toggle("js-dl-linux", isLin);
+		navDl.classList.toggle("js-dl-setup", !isLin);
+		navDl.href = isLin ? ($("dl-linux")?.href || "/download/linux") : ($("dl-setup")?.href || "/download");
+	}
+}
+document.querySelectorAll(".os-tab").forEach((b) => b.addEventListener("click", () => setOsTab(b.dataset.os)));
+if ($("lc-copy")) {
+	$("lc-copy").addEventListener("click", () => {
+		navigator.clipboard?.writeText("sudo apt install ./NimbusLauncher.deb").then(() => showToast("Copied apt install command!"));
+	});
+}
+if (/Linux/i.test(navigator.userAgent) && !/Android/i.test(navigator.userAgent)) {
+	setOsTab("linux");
+}
+
 document.addEventListener("click", (e) => {
-	const link = e.target.closest(".js-dl-setup, .js-dl-portable");
+	const link = e.target.closest(".js-dl-setup, .js-dl-portable, .js-dl-linux, .js-dl-linux-tar");
 	if (!link) return;
 	const bumped = Number(localStorage.getItem("nimbus_dl_bump") || 0) + 1;
 	localStorage.setItem("nimbus_dl_bump", String(Math.min(bumped, 5)));
