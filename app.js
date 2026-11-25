@@ -460,12 +460,12 @@ function renderReleaseData(data) {
 	if (linuxDeb && linuxDeb.url) {
 		document.querySelectorAll(".js-dl-linux").forEach((a) => { a.href = linuxDeb.url; });
 		const sz = fmtMB(linuxDeb.size);
-		if ($("dl-linux-meta")) $("dl-linux-meta").textContent = `NimbusLauncher.deb · ${tag}${sz ? " · " + sz : ""}`;
+		if ($("dl-linux-meta")) $("dl-linux-meta").textContent = `Linux Mint / Ubuntu · ${tag}${sz ? " · " + sz : ""}`;
 	}
 	if (linuxTar && linuxTar.url) {
 		document.querySelectorAll(".js-dl-linux-tar").forEach((a) => { a.href = linuxTar.url; });
 		const sz = fmtMB(linuxTar.size);
-		if ($("dl-linux-tar-meta")) $("dl-linux-tar-meta").textContent = `NimbusLauncher-linux.tar.gz · ${tag}${sz ? " · " + sz : ""}`;
+		if ($("dl-linux-tar-meta")) $("dl-linux-tar-meta").textContent = `Any Linux · ${tag}${sz ? " · " + sz : ""}`;
 	}
 
 	const localClicks = Number(localStorage.getItem("nimbus_dl_bump") || 0);
